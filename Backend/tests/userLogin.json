@@ -1,0 +1,59 @@
+[
+    {
+      "email": "email@gmail.com",
+      "password": "ah@111201@",
+      "status": 200
+    },
+    {
+      "email": "email@gmail.com",
+      "password": "ah@1201",
+      "status": 400
+    },
+    {
+      "email": "email@gmail.com",
+      "password": "ah@120001",
+      "status": 401
+    },
+    {
+      "email": "user@example.com",
+      "password": "Password123!",
+      "status": 200
+    },
+    {
+      "email": "rezikhawja@gmail.com",
+      "password": "passwo",
+      "status": 400
+    },
+    {
+        "email": "rezikhwja@gmail.com",
+        "password": "password",
+        "status": 401
+      },
+    {
+      "email": "testuser@example.com",
+      "password": "testpassword",
+      "status": 401
+    },
+    {
+      "email": "admin@example.com",
+      "password": "AdminPassword123!",
+      "status": 200
+    },
+    {
+      "email": "guest@example.com",
+      "password": "guestpassword",
+      "status": 401
+    },
+    {
+      "email": "superuser@example.com",
+      "password": "SuperUserPassword123!",
+      "status": 200
+    },
+    {
+      "email": "invalidemail",
+      "password": "InvalidPassword123!",
+      "status": 400
+    }
+
+  ]
+  

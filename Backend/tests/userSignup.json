@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Abdul Haseeb",
+    "email": "email@gmail.com",
+    "password": "ah@111201@",
+    "status": 409
+  },
+  {
+    "name": "Abdul@Haseeb",
+    "email": "email@gmail.com",
+    "password": "Ah@111201@",
+    "status": 400
+  },
+  {
+    "name": "AbdulHaseeb",
+    "email": "email1@gmail.com",
+    "password": "Ah@111201",
+    "status": 409
+  },
+  {
+    "name": "AbdulHaseeb",
+    "email": "email21@gmail.com",
+    "password": "Ah@111201",
+    "status": 409
+  }
+]
