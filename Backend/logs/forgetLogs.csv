@@ -1,0 +1,21 @@
+,timestamp,level,email,message
+,2024-02-29T16:32:47.567Z,info,N/A,ValidationError: "value" must be of type object
+,2024-02-29T16:35:42.339Z,info,N/A,ValidationError: "value" must be of type object
+,2024-02-29T16:37:08.676Z,info,N/A,ValidationError: "value" must be of type object
+,2024-02-29T16:38:08.007Z,info,N/A,ValidationError: "value" must be of type object
+,2024-02-29T16:38:35.848Z,info,N/A,ValidationError: "value" must be of type object
+,2024-02-29T16:51:43.602Z,info,N/A,ValidationError: "email" must be a valid email
+,2024-02-29T16:54:06.338Z,info,N/A,User not found
+,2024-02-29T16:54:26.015Z,info,N/A,User not found
+,2024-02-29T16:54:31.402Z,info,N/A,User not found
+,2024-02-29T16:54:59.866Z,info,N/A,User not found
+,2024-02-29T16:55:59.437Z,info,N/A,User not found
+,2024-02-29T17:37:20.082Z,info,N/A,ValidationError: "email" is required
+,2024-02-29T17:41:51.137Z,info,N/A,ReferenceError: bcrypt is not defined
+,2024-02-29T17:47:18.019Z,info,N/A,Error: connect EHOSTUNREACH 64.233.184.108:465
+,2024-02-29T18:14:47.120Z,info,N/A,ObjectParameterError: Parameter "filter" to findOneAndUpdate() must be an object, got "email@gmail.com" (type string)
+,2024-02-29T18:20:00.952Z,info,N/A,ReferenceError: hashedOTP is not defined
+,2024-03-01T05:56:06.391Z,info,N/A,Error: getaddrinfo ENOTFOUND smtp.gmail.com
+,2024-03-01T06:41:08.456Z,info,N/A,User not found
+,2024-03-01T06:41:45.903Z,info,N/A,User not found
+,2024-03-01T06:42:01.957Z,info,N/A,User not found

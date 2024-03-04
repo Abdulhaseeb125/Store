@@ -7,11 +7,11 @@ let ConnectMongo = async () => {
             socketTimeoutMS: 3000,
             connectTimeoutMS: 3000,
         });
-     return true;
+        return true;
     } catch (err) {
         console.error('Error connecting to MongoDB database:', err);
         return false
-    } 
+    }
 }
 module.exports = ConnectMongo;
 

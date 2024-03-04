@@ -49,7 +49,7 @@ module.exports.userLogin = async function (req, res) {
 
         // Generate JWT token
         const token = jwt.sign({ email: user.email, name: user.name }, process.env.JWT_SECRET_KEY, { expiresIn: "1d", issuer: 'My Store' });
-        return res.status(200).json({ token }); // Send JWT token as response
+        return res.status(201).json({ token }); // Send JWT token as response
     } catch (error) {
         return handleErrors(res, type = "Unexpected", error || "Something went wrong", logsPath, null); // Catch unexpected errors
     }

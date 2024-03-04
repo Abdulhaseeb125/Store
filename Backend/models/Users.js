@@ -15,6 +15,8 @@ let userSchema = new mongoose.Schema({
     },
     created_at: { type: Date, default: Date.now() },
     updated_at: { type: Date, default: Date.now() },
+    otp: { type: String },
+    expires_at: { type: Date}
 });
 
 const User = mongoose.model('users', userSchema);

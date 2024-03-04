@@ -45,7 +45,7 @@ module.exports.signup = async function (req, res) {
 
         await newUser.save(); // Save the new user to the database
         // Create JWT token for the new user
-        const token = jwt.sign({ userId: newUser._id, Name: newUser.name, email: newUser.email }, process.env.JWT_SECRET_KEY);
+        const token = jwt.sign({  name: newUser.name, email: newUser.email }, process.env.JWT_SECRET_KEY);
         res.status(201).json({ token }); // Send token as response
     } catch (error) {
         handleErrors(res, "Unexpected", error, logsPath); // Handle unexpected errors
