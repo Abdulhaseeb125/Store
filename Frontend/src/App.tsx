@@ -1,20 +1,22 @@
 // import React from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Index from "./Pages/Index";
-import Layout from "./Pages/Auth/Layout";
+import Layout from "./Pages/User/Auth/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "./components/loading";
-import ProtectedRoutes from "./Pages/ProtectedRoutes/ProtectedRoutes";
 import { useEffect } from "react";
 import { getUser } from "./store/UserSlices/userSlice";
-import Error404 from "./Pages/Error404";
+import Error404 from "./Pages/Errors/Error404";
+import Dashboard from "./Pages/User/UserDashboard/Dashboard";
+import Loading from "./components/common/subComponents/loading";
 
 export default function App() {
+  const navigate = useNavigate();
   let isLoading = useSelector((state: any) => state.general.isLoading);
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
+  const user = useSelector((state: any) => state.user);
 
   return (
     <div>
@@ -22,7 +24,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/Auth/*" element={<Layout />} />
-        <Route path="/user/*" element={<ProtectedRoutes />} />
+        {user && user.isAuthenticated ? (
+          <Route path="/dashboard/*" element={<Dashboard />} />
+        ) : null}
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>

@@ -1,15 +1,16 @@
-import Banner from "@/components/Banner";
-import CategoryPanel from "@/components/CategoryPanel";
-import Footer from "@/components/Footer";
-import Navigation from "@/components/Navigation";
-import Poster from "@/components/Poster";
-import SalePoint from "@/components/sections/SalePoint";
-import CountDown from "@/components/sections/TimeCounter";
+
+import Navigation from "@/components/compromised/Navigation";
+// import SalePoint from "@/components/Common/sections/SalePoint";
+// import CountDown from "@/components/Common/sections/TimeCounter";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { clearLoading } from "@/store/generalSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Banner from "@/components/common/subComponents/Banner";
+import CategoryPanel from "@/components/common/subComponents/CategoryPanel";
+import Footer from "@/components/common/subComponents/Footer";
+import Poster from "@/components/common/subComponents/Poster";
 
 export default function Index() {
   let dispatch = useDispatch();

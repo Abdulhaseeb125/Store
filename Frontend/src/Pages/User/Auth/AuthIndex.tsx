@@ -2,7 +2,7 @@
 
 import { Link } from "react-router-dom";
 
-export default function UserIndex() {
+export default function AuthIndex() {
 
   return (
     <div className=" px-10 py-10 rounded-lg sm:input_box my-auto">

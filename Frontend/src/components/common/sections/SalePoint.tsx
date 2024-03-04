@@ -1,6 +1,6 @@
 // import React from "react";
 // import React from "react";
-import ProductCard from "../subComponents/ProductCard";
+import ProductCard from "../../customSubComponents/ProductCard";
 import TimeCounter from "./TimeCounter";
 
 export default function SalePoint() {

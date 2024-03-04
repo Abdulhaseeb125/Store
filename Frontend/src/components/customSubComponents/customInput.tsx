@@ -20,9 +20,8 @@ export default function CustomInput(props: Props) {
     <Label className={`relative  flex items-center  w-full`}>
       <span className="absolute px-2">{props.icon}</span>
       <Input
-        className={" placeholder:italic placeholder:text-neutral-400 block py-2 pl-10 shadow-sm focus:outline-none focus:border-0 focus-visible:ring-0 focus:ring-0 sm:text-sm rounded-none focus-visible:border-b-2  border-0 border-b-2 border-neutral-600".concat(
-          ...(" " + props.classNames)
-        )}
+        className={" placeholder:italic placeholder:text-neutral-400 block py-2 pl-10 shadow-sm focus:outline-none focus:border-0 focus-visible:ring-0 focus:ring-0 sm:text-sm rounded-none focus-visible:border-b-2 border-0 border-b-2 border-neutral-600"
+          .concat(...(" " + props.classNames))}
         placeholder={props.placeholder ?? "Enter text here"}
         type={props.type ?? "text"}
         name={props.name ?? "name"}

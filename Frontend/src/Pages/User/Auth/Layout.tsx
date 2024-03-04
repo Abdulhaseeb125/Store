@@ -2,7 +2,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./Signup";
-import UserIndex from "./UserIndex";
+import UserIndex from "./AuthIndex";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { clearLoading } from "@/store/generalSlice";

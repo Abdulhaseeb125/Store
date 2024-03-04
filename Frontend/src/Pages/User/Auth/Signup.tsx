@@ -1,43 +1,48 @@
 // import React from "react";
 import "#/css/style.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Key, Mail, User } from "lucide-react";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Key, Mail } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import loginValidator from "@/Validators/loginValidator";
-import CustomInput from "@/components/subComponents/customInput";
 import Axios from "@/Axios";
+import { getUser } from "@/store/UserSlices/userSlice";
+import CustomInput from "@/components/customSubComponents/customInput";
 import {
   clearServerError,
   clearValidationErrors,
   setServerError,
   setValidationError,
 } from "@/store/UserSlices/errorSlice";
-import { setLoginState } from "@/store/UserSlices/loginSlice";
 import Cookies from "js-cookie";
+import { setState } from "@/store/UserSlices/signUpSlice";
+import signUpValidator from "@/Validators/signUpValidator";
 import { useEffect } from "react";
 import { clearLoading, setLoading } from "@/store/generalSlice";
 import axios from "axios";
 
-export default function Login() {
-  let navigate = useNavigate();
-  const loginStates = useSelector((state: any) => state.login);
-  const errors = useSelector((state: any) => state.errors);
-  const dispatch = useDispatch();
-
+// Sign up Component
+export default function SignUp() {
+  //.....States + useHook......
+  let signUpStates = useSelector((state: any) => state.signUp);
+  let errors = useSelector((state: any) => state.errors);
+  let dispatch = useDispatch();
+  const navigator = useNavigate();
+  // ........Initialization.........
   useEffect(() => {
     dispatch(clearServerError());
     dispatch(clearValidationErrors());
     dispatch(clearLoading());
   }, []);
 
-  async function requestLogin() {
-    dispatch(setLoading());
+  //.......Functions.........
+
+  async function requestSignUp() {
     try {
-      let response = await Axios.post("/user/login", loginStates.data, {
+      dispatch(setLoading());
+      let response = await Axios.post("/auth/signup", signUpStates.data, {
         timeout: 5000,
       });
       if (response.data.token && response.status === 201) {
@@ -45,10 +50,10 @@ export default function Login() {
           expires: 3,
           sameSite: "strict",
         });
-        dispatch(clearLoading());-
-        navigate("/");
+        dispatch(getUser());
+        dispatch(clearLoading());
+        navigator("/");
       }
-      return;
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         if (error.code === "ERR_NETWORK" || error.message.includes("timeout")) {
@@ -58,8 +63,8 @@ export default function Login() {
             )
           );
         } else {
-          if (error.response?.status == 401) {
-            dispatch(setServerError("Invalid email or password"));
+          if (error.response?.status == 409) {
+            dispatch(setServerError("Email already exists"));
           } else {
             dispatch(
               setServerError(
@@ -73,32 +78,38 @@ export default function Login() {
     }
   }
 
-  // * Handling Change in Input
-
+  // ......On Input Change..........
   function handleChange(e: any) {
     let { name, value } = e.target;
-    dispatch(setLoginState({ name, value }));
+    dispatch(setState({ name: name, value: value }));
+    dispatch(clearValidationErrors());
   }
-
-  // * Handling Submit
-
+  // .......On Form Submit............
   function handleSubmit(e: any) {
     e.preventDefault();
     dispatch(clearValidationErrors());
     dispatch(clearServerError());
-    let { error } = loginValidator.validate(loginStates.data);
-
+    let { error } = signUpValidator.validate(signUpStates.data);
     if (error) {
       const validationError = error.details[0];
-      dispatch(
-        setValidationError({
-          name: String(validationError.path[0]),
-          value: validationError.message,
-        })
-      );
+      if (validationError.path[0] == "confirm") {
+        dispatch(
+          setValidationError({
+            name: "confirm",
+            value: "Password did not matched",
+          })
+        );
+      } else {
+        dispatch(
+          setValidationError({
+            name: String(validationError.path[0]),
+            value: validationError.message,
+          })
+        );
+      }
       return;
     }
-    requestLogin();
+    requestSignUp();
   }
 
   return (
@@ -116,10 +127,39 @@ export default function Login() {
         )}
         <form onSubmit={handleSubmit}>
           <div className="grid  gap-1">
+            {errors.validationErrors.name ? (
+              <div>
+                <CustomInput
+                  value={signUpStates.data.name}
+                  type="text"
+                  placeholder={"Name"}
+                  icon={<User color="#EF4040" />}
+                  name="name"
+                  func={(e: any) => {
+                    return handleChange(e);
+                  }}
+                  classNames="border-[#EF4040]"
+                />
+                <div className="text-sm text-[#EF4040]">
+                  {errors.validationErrors.name}
+                </div>
+              </div>
+            ) : (
+              <CustomInput
+                value={signUpStates.data.name}
+                type="name"
+                placeholder="Name"
+                icon={<User />}
+                name="name"
+                func={(e: any) => {
+                  return handleChange(e);
+                }}
+              />
+            )}
             {errors.validationErrors.email ? (
               <div>
                 <CustomInput
-                  value={loginStates.data.email}
+                  value={signUpStates.data.email}
                   type="email"
                   placeholder={"Email"}
                   icon={<Mail color="#EF4040" />}
@@ -135,7 +175,7 @@ export default function Login() {
               </div>
             ) : (
               <CustomInput
-                value={loginStates.data.email}
+                value={signUpStates.data.email}
                 type="email"
                 placeholder="Email"
                 icon={<Mail />}
@@ -148,7 +188,7 @@ export default function Login() {
             {errors.validationErrors.password ? (
               <div>
                 <CustomInput
-                  value={loginStates.data.password}
+                  value={signUpStates.data.password}
                   type="password"
                   placeholder={"Password"}
                   icon={<Key color="#EF4040" />}
@@ -164,7 +204,7 @@ export default function Login() {
               </div>
             ) : (
               <CustomInput
-                value={loginStates.data.password}
+                value={signUpStates.data.password}
                 type="password"
                 placeholder="Password"
                 icon={<Key />}
@@ -174,10 +214,35 @@ export default function Login() {
                 }}
               />
             )}
-
-            <Link to={""} className="flex justify-end hover:underline m-1">
-              Forget Password
-            </Link>
+            {errors.validationErrors.confirm ? (
+              <div>
+                <CustomInput
+                  value={signUpStates.data.confirm}
+                  type="password"
+                  placeholder="Confirm Password"
+                  icon={<Key color="#EF4040" />}
+                  name="confirm"
+                  func={(e: any) => {
+                    return handleChange(e);
+                  }}
+                  classNames="border-[#EF4040]"
+                />
+                <div className="text-sm text-[#EF4040]">
+                  {errors.validationErrors.confirm}
+                </div>
+              </div>
+            ) : (
+              <CustomInput
+                value={signUpStates.data.confirm}
+                type="password"
+                placeholder="Confirm Password"
+                icon={<Key />}
+                name="confirm"
+                func={(e: any) => {
+                  return handleChange(e);
+                }}
+              />
+            )}
           </div>
           <br />
           <div className="flex gap-3 items-center">
@@ -197,10 +262,10 @@ export default function Login() {
         <div className="mt-4">
           Don't have an account?{" "}
           <Link
-            to={"/auth/signup"}
+            to={"/auth/login"}
             className="hover:underline text-primary px-2"
           >
-            Sign up
+            Log in
           </Link>
         </div>
       </div>

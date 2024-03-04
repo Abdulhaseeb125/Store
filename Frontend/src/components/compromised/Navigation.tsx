@@ -1,15 +1,15 @@
 import { Search, User } from "lucide-react";
 // import { ModeToggle } from "./themeControls/modeToggle";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Separator } from "./ui/separator";
-import NavSideMenu from "./subComponents/NavSideMenu";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Separator } from "../ui/separator";
+import NavSideMenu from "./NavSideMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import ProfileDropdown from "./Auth/Dropdowns/Profile";
 import { getUser } from "@/store/UserSlices/userSlice";
+import ProfileDropdown from "../user/dashboard/subComponents/Profile";
 
 export default function Navigation() {
   let user = useSelector((state: any) => state.user);

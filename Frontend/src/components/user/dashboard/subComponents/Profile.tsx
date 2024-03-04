@@ -22,7 +22,7 @@ export default function ProfileDropdown({ user }: any) {
         <DropdownMenuTrigger>
           <Avatar className="h-9 w-9">
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>AB</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
@@ -31,16 +31,16 @@ export default function ProfileDropdown({ user }: any) {
             <ModeToggle />
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <Link to={"user/dashboard"}>
+          <Link to={"/dashboard"}>
             <DropdownMenuItem className="flex gap-3">
               <DashboardIcon />
               Dashboard
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem className="flex gap-3">
+          {/* <DropdownMenuItem className="flex gap-3">
             <ShoppingCart size={20} />
             Cart
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem
             className="flex gap-3"
             onClick={() => dispatch(clearUser())}
